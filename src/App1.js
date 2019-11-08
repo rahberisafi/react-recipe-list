@@ -6,9 +6,9 @@ import RecipeDetails from "./components/RecipeDetails";
 
 class App extends Component {
   state = {
-    recipes: [],
+    recipes: recipes,
     url: "https://www.food2fork.com/api/search?key=7d6162d13188077db34b2c936e7aee58",
-    details_id: 35389,
+    details_id: 35382,
     pageIndex: 1
   };
 
@@ -24,7 +24,7 @@ async getRecipes() {
   }
 }
 
-componentDidMount() {
+componentDidMount(){
   this.getRecipes();
 }
 
@@ -32,13 +32,22 @@ displayPage = index => {
   switch (index) {
     default:
     case 1:
-       return <RecipeList recipes={this.state.recipes} handleDetails={this.handleDetails} />;
+       return (
+         <RecipeList
+         recipes={this.state.recipes}
+         handleDetails={this.handleDetails}
+         />
+     );
     case 0:
         return (
-          <RecipeDetails id={this.state.details_id} handleIndex={this.handleIndex} />
+          <RecipeDetails
+          id={this.state.details_id}
+          handleIndex={this.handleIndex}
+          />
       );
   }
 };
+
 
 handleIndex = index => {
   this.setState({
@@ -57,7 +66,7 @@ handleDetails = (index, id) => {
 
     return (
     <React.Fragment>
-     {this.displayPage(this.state.pageIndex)}
+      {this.displayPage(this.state.pageIndex)}
     </React.Fragment>
    );
   }
